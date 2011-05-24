@@ -15,15 +15,20 @@ ActiveRecord::Schema.define(:version => 20110517101351) do
   create_table "friendships", :force => true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "userA_id"
+    t.integer  "user_id"
     t.integer  "userB_id"
   end
 
   create_table "users", :force => true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "name"
+    t.string   "display_name"
+    t.string   "nick_name"
     t.integer  "uid"
+    t.integer  "gender"
+    t.integer  "crawled"
+    t.integer  "has_profile_image"
+    t.integer  "avatar"
   end
 
 end

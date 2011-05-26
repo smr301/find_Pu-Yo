@@ -1,7 +1,8 @@
+#ruby crawler.rb then start crawl.
+
 #!/usr/bin/env ruby
 #require File.dirname(__FILE__) + '/config/environments/development.rb'
 #File.dirname(__FILE__) is the position right now.
-
 require ::File.expand_path('../config/environment', __FILE__)
 
 require 'rubygems'

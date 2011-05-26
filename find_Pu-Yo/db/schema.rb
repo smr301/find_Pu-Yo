@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(:version => 20110517101351) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
-    t.integer  "userB_id"
+    t.integer  "friend_id"
   end
 
   create_table "users", :force => true do |t|

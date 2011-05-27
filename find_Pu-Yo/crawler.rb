@@ -37,7 +37,7 @@ def set_user_data(user_id) #can use nick_name or uid
 end
 
 def get_friends_by_offset(uid, offset)
-  friends_url = GET_FRIENDS_URL + uid.to_s + "&offset=" + offset.to_s
+  friends_url = GET_FRIENDS_URL + uid.to_s + "&offset=" + offset.to_s + "&limit=50"
   uri = URI.parse(friends_url)
   res = Net::HTTP.get_response uri
   data = res.body
@@ -50,10 +50,10 @@ def get_friends(uid)
   friends = []
   friends_tmp = get_friends_by_offset(uid, offset)
   friends += friends_tmp
-  while friends_tmp!=[] do    
+  while (friends_tmp!=[]&&offset<=1000) do    
     friends_tmp = get_friends_by_offset(uid, offset)
     friends += friends_tmp
-    offset += 10
+    offset += 50
     print "-----offset:#{offset}-----\n"
   end
   friends
@@ -62,13 +62,13 @@ end
 def add_friends_to_database(user)
   friends_list = get_friends(user.uid)
   friends_list.each do |f|
-    print "crawled #{@count} users....\n"
-    
+  
     u = User.find_or_create_by_uid(f["uid"])
-    
-    #u = User.find_by_uid(f["uid"])
-    #if u == nil then
-      #u = User.new
+    check = Friendship.find_by_user_id_and_friend_id(u.id, user.id)
+    #check = u.inverse_friendships.find_by_user_id(u.id)
+    next if check != nil
+    #if check == nil
+      print "************\n"
       u.gender = f["gender"]
       u.display_name = f["display_name"]
       u.nick_name = f["nick_name"]
@@ -81,10 +81,14 @@ def add_friends_to_database(user)
       friendship.friend = u
       friendship.user = user
       friendship.save
+  
+      print "crawled #{@count} users....\n"
+      @count += 1
     #else
-      
+      #print "%%%%%%%%%%%%%%%%%%\n"
+      #print "check uid=#{check.user_id},check fid=#{check.friend_id},user id=#{user.id}, u id=#{u.id}\n"
     #end
-    @count += 1
+    
   end
 end
 
@@ -93,9 +97,9 @@ loop do
   if @user == nil
     @user = set_user_data("zerodie")
   end
-  print "-----user : #{user.nick_name}-----\n"
+  print "-----user:#{@user.nick_name}-----\n"
   add_friends_to_database(@user)
   @user.update_attribute("crawled",1)
   print "-----finish crawling one user's friends -----\n"
-  print "-----#frienships:#{Friendship.all.count}, #users:#{User.all.count}-----\n"
+  print "-----#frienships:#{Friendship.all.count}, #users:#{User.all.count}-----\n\n"
 end

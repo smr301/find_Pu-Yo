@@ -7,18 +7,20 @@
 
 class UsersController < ApplicationController
 
+  def test
+  end
+  
   def index
     @user = User.find(1) #zerodie
-    @friends = @user.all_friends
-    @counter = count(@friends)[0..9] #top10 recommended
-    #@user.uid = user_id2uid(@user.name)
+    friends = @user.all_friends
+    @counter = count(friends)[0..9] #top10 recommended
     respond_to do |format|
       format.html
     end
   end
   
   def count(friends_l1)
-    counter = {}
+    counter = {} #record friends_not_yet
     counter.default = 0
     counter2 = {} #record friends_already
     friends_l1.each do |f|
@@ -36,10 +38,8 @@ class UsersController < ApplicationController
       end
     end
     counter[@user.nick_name] = -1 #self=-1 for flag
-    @counter2 = counter2.sort { |a,b| b[1]<=>a[1] } [0..9]#sort by value
-    counter.sort { |a,b| b[1]<=>a[1] } #sort by value
-   
-    
+    @counter2 = counter2.sort { |a,b| b[1]<=>a[1] } [0..9]#sort by value and access top10
+    counter.sort { |a,b| b[1]<=>a[1] } #sort by value    
   end
 
 end

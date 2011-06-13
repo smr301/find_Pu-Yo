@@ -1,0 +1,12 @@
+<h3><%= @user.nick_name %>'s friends: </h3>
+<ol>
+	<% @friends.each do |f|%>
+ 	<li><%= f.display_name %></li>
+	<% end %>
+</ol>
+<p>---------------------</p>
+<ol>
+	<% @counter.each_pair do | key, value |%>
+ 	<li><%= key %> , <%= value %></li>
+	<% end %>
+</ol>

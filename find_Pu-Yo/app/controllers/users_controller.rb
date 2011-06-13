@@ -8,7 +8,7 @@
 class UsersController < ApplicationController
 
   def index
-    @user = User.find(1) #zerodie
+    @user = User.find(5) #zerodie
     @friends = @user.all_friends
     @counter = count(@friends)
     #@user.uid = user_id2uid(@user.name)
@@ -26,7 +26,7 @@ class UsersController < ApplicationController
         counter[f2.nick_name] = counter[f2.nick_name] + 1
       end
     end
-    counter
+    counter.sort {|a,b| b[1]<=>a[1]}
   end
       
 end

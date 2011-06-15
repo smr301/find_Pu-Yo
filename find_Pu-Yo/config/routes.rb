@@ -1,5 +1,5 @@
 FindPuYo::Application.routes.draw do
-  resources :friends, :only => [:index, :test]
+  resources :friends, :only => [:index, :query]
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -50,7 +50,7 @@ FindPuYo::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => "friends#index"
+  root :to => "friends#query"
 
   # See how all your routes lay out with "rake routes"
 

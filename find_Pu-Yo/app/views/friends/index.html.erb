@@ -1,13 +1,33 @@
 <h3>Hello <%= @user.nick_name %> !!</h3>
 <p>--------recommended friends ranking-------------</p>
-<ol>
+<table border="1">
+	<tr><td>Nick name</td><td># mutual friends</td></tr>
 	<% @counter.each do | key, value |%>
- 	<li><%= key %> , <%= value %></li>
+	<% u = User.find_by_uid(key) %>
+	<% avatar_url = "http://avatars.plurk.com/" + key.to_s + "-medium.gif" %>
+	<% profile_url = "http://www.plurk.com/" + u.nick_name %>
+	<tr>
+    <td><a href="<%= profile_url %>"><img src="<%= avatar_url %>" /></a></td>
+    <td rowspan="2"><%= value %></td>
+  </tr>
+  <tr>
+    <td><a href="<%= profile_url %>"><%= u.nick_name %></a></td>
+  </tr>
 	<% end %>
-</ol>
+</table>
 <p>-----------good friends ranking----------</p>
-<ol>
+<table border="1">
+	<tr><td>Nick name</td><td># mutual friends</td></tr>
 	<% @counter2.each do | key, value |%>
- 	<li><%= key %> , <%= value %></li>
+	<% u = User.find_by_uid(key) %>
+	<% avatar_url = "http://avatars.plurk.com/" + key.to_s + "-medium.gif" %>
+	<% profile_url = "http://www.plurk.com/" + u.nick_name %>
+	<tr>
+		<td><a href="<%= profile_url %>"><img src="<%= avatar_url %>" /></a></td>
+    <td rowspan="2"><%= value %></td>
+  </tr>
+  <tr>
+    <td><a href="<%= profile_url %>"><%= u.nick_name %></a></td>
+  </tr>
 	<% end %>
-</ol>
+</table>

@@ -1,0 +1,5 @@
+Hello <%= params[:user_name] %>! <br />
+<%= form_tag do %>
+	<%= text_field_tag :user_name %>
+<% end %>
+<%= link_to 'Find Pu-Yo', :controller => "friends", :action => "index", :user_name => params[:user_name] %>

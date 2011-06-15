@@ -1,14 +1,21 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>FindPuYo</title>
-  <%= stylesheet_link_tag :all %>
-  <%= javascript_include_tag :defaults %>
-  <%= csrf_meta_tag %>
-</head>
-<body>
-
-<%= yield %>
-
-</body>
+  <head>
+    <title>FindPuYo</title>
+    <%= stylesheet_link_tag :all %>
+    <%= javascript_include_tag :defaults %>
+    <%= csrf_meta_tag %>
+    <%= stylesheet_link_tag 'puyo_custom', :media => 'screen' %>
+  </head>
+  
+  <body>
+	<div class="container">
+		<header>
+			<%= image_tag("logo.png", :alt => "Find Pu-Yo") %>
+		</header>
+		<section>
+			<%= yield %>
+		</section>
+	</div>
+  </body>
 </html>

@@ -40,12 +40,10 @@ footer nav {
 
 /* Table */
 table { 
-  border: 0; 
-  border-spacing: 0;
+  border: 0;
 }  
 td { 
   border: 0;
-  padding: 0;
 }
 
 /* Links */

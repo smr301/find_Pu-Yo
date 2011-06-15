@@ -1,23 +1,14 @@
-<%= stylesheet_link_tag 'puyo_custom', :media => 'screen' %>
-
 Hello <%= params[:user_name] %>! <br />
 
-<%= form_tag do %>
+		
+<table height="340" width="520" background="/images/back.png">
+	<tr>
+		<td width=18%></td>
+		<td width=35%><%= form_tag do %>
 				<%= text_field_tag :user_name %>
-			<% end %>
-<%= link_to 'Find', :controller => "friends", :action => "index", :user_name => params[:user_name] %>
-			
-<table>
-	<tr>
-		<td><%= image_tag("1.png") %></td>
+			<% end %></td>
+		<td><%= link_to 'Find', :controller => "friends", :action => "index", :user_name => params[:user_name] %></td>
 	</tr>
-	<tr>
-		<td><%= image_tag("2.png") %></td>
-		<td></td>
-		<td></td>
-		<td><%= image_tag("3.png") %></td>
-	</tr>
-	<tr>
-		<td><%= image_tag("4.png") %></td>
+	<tr height =60%>
 	</tr>
 </table>

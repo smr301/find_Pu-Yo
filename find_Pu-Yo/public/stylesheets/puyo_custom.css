@@ -12,12 +12,11 @@ header {
 }
 
 header img {
-  padding: 1em;
+  padding-top: 1em;
   background: #CF682E;
 }
 
 section {
-  margin-top: 1em;
   font-size: 120%;
   padding: 20px;
 }

@@ -1,12 +1,13 @@
-Hello <%= params[:user_name] %>! <br />
-		
 <table height="340" width="520" background="/images/back.png">
 	<tr>
 		<td width=18%></td>
-		<td width=35%><%= form_tag do %>
-				<%= text_field_tag :user_name %>
+		<td width=35%><%= form_for :friends, :url => { :action => :index } do |f| %>
+			<%= text_field_tag :user_name %><br />
+			<%= radio_button_tag :gender, 2, true %><font size=1>All</font>
+			<%= radio_button_tag :gender, 0 %><font size=1>Female Only</font>
+			<%= radio_button_tag :gender, 1 %><font size=1>Male Only</font>
+			<%= submit_tag "Go" %>
 			<% end %></td>
-		<td><%= link_to 'Find', :controller => "friends", :action => "index", :user_name => params[:user_name] %></td>
 	</tr>
 	<tr height =60%>
 	</tr>

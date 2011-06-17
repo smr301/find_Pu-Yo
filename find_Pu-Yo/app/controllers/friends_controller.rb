@@ -5,6 +5,7 @@ class FriendsController < ApplicationController
 
   def index
     #@user = User.find_by_nick_name("zerodie")
+    @gender = params[:gender].to_i
     @user = User.find_by_nick_name(params[:user_name])
     friends = @user.all_friends
     @counter = count(friends)[0..9] #top10 recommended
@@ -27,7 +28,11 @@ class FriendsController < ApplicationController
         if counter2.has_key?(f2.uid)
           counter2[f2.uid] = counter2[f2.uid] + 1 
         else
-          counter[f2.uid] = counter[f2.uid] + 1 
+          if @gender == 2 #all
+              counter[f2.uid] = counter[f2.uid] + 1
+          elsif f2.gender == @gender
+              counter[f2.uid] = counter[f2.uid] + 1
+          end 
         end
       end
     end

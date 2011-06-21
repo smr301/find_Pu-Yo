@@ -37,6 +37,11 @@ module FriendsHelper
     res = Net::HTTP.get_response uri
     data = res.body
     friends_list = JSON.parse(data)
+    tmp = []
+    friends_list.each do |f|
+        tmp << f
+    end
+    tmp
   end
 
   def get_friends(uid)

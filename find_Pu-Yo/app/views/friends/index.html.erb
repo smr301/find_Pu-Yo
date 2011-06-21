@@ -27,12 +27,18 @@
 <table border="1">
 	<tr><td>Nick name</td><td># mutual friends</td></tr>
 	<% @counter2.each do | key, value |%>
+	<% next if value < 0 %>
 	<% u = User.find_by_uid(key) %>
 	<% avatar_url = "http://avatars.plurk.com/" + key.to_s + "-medium.gif" %>
 	<% profile_url = "http://www.plurk.com/" + u.nick_name %>
 	<tr>
 		<td><a href="<%= profile_url %>"><img src="<%= avatar_url %>" /></a></td>
-    <td rowspan="2"><%= value %></td>
+    <td rowspan="2"><%= value %>
+			<% a = 0 %>
+			<% while (a < value) do %>
+				o
+			<% end %>
+		</td>
   </tr>
   <tr>
     <td><a href="<%= profile_url %>"><%= u.nick_name %></a></td>

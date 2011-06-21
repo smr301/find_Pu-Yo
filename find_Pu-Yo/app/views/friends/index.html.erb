@@ -4,11 +4,19 @@
 	<tr><td>Nick name</td><td># mutual friends</td></tr>
 	<% @counter.each do | key, value |%>
 	<% u = User.find_by_uid(key) %>
-	<% avatar_url = "http://avatars.plurk.com/" + key.to_s + "-medium.gif" %>
-	<% profile_url = "http://www.plurk.com/" + u.nick_name %>
+
 	<tr>
-    <td><a href="<%= profile_url %>"><img src="<%= avatar_url %>" /></a></td>
-    <td rowspan="2"><%= value %></td>
+	<% if u.has_profile_image == 1 %>
+      <% if u.avatar == nil %>
+	    <% image = "http://avatars.plurk.com/" + key.to_s + "-medium.gif" %>
+	  <% else %>
+	    <% image = "http://avatars.plurk.com/" + key.to_s + "-medium.gif" + u.avatar %>
+	  <% end %>
+	<% else %>
+	  <% image = "http://www.plurk.com/static/default_medium.gif" %>
+    <% end %>
+	<td><a href="<%= profile_url %>"><img src="<%= image %>" /></a></td>
+	<td rowspan="2"><%= value %></td>
   </tr>
   <tr>
     <td><a href="<%= profile_url %>"><%= u.nick_name %></a></td>

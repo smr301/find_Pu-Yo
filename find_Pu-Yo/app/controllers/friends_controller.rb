@@ -1,5 +1,6 @@
+
 class FriendsController < ApplicationController
-  
+  include FriendsHelper  
   def query
   end
 
@@ -8,12 +9,28 @@ class FriendsController < ApplicationController
     @gender = params[:gender].to_i
     @user = User.find_by_nick_name(params[:user_name])
     friends = @user.all_friends
+    #
+    grab_level_2(friends)
+    #
     @counter = count(friends)[0..9] #top10 recommended
     respond_to do |format|
       format.html
     end
   end
 
+  def grab_level_2(friends)
+    friends.each do |f|
+      if f.crawled != 1
+        puts get_friends_by_offset(f.uid, 0)
+        #add_friends_to_database(f)
+        #f.update_attribute("crawled",1)
+        print f.id
+        print "grab new one user"
+      end
+    end
+  end
+  
+  
   def count(friends_l1)
     counter = {} #record friends_not_yet
     counter.default = 0
@@ -44,4 +61,5 @@ class FriendsController < ApplicationController
     @counter2 = counter2.sort { |a,b| b[1]<=>a[1] } [0..9]#sort by value and access top10
     counter.sort { |a,b| b[1]<=>a[1] } #sort by value    
   end
+  
 end

@@ -1,6 +1,6 @@
 FindPuYo::Application.routes.draw do
   resources :friends, :only => [:index, :query, :about, :random, :nothisuser]
-
+  match '/about', :to => 'friends#about'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

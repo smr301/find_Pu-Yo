@@ -1,6 +1,10 @@
 <h3>Hello <%= @user.nick_name %> !!</h3>
-<p>--------recommended friends ranking-------------</p>
-<table border="1">
+
+<table>
+<tr>
+<td width=400 class="totop">
+<b>----recommended friends ranking----<br /></b>
+<table>
 	<tr><td>Nick name</td><td># mutual friends</td></tr>
 	<% @counter.each do | key, value |%>
 	<% u = User.find_by_uid(key) %>
@@ -23,8 +27,10 @@
   </tr>
 	<% end %>
 </table>
-<p>-----------good friends ranking----------</p>
-<table border="1">
+</td>
+<td width=400 class="totop">
+<b>----good friends ranking----<br /></b>
+<table>
 	<tr><td>Nick name</td><td># mutual friends</td></tr>
 	<% @counter2.each do | key, value |%>
 	<% next if value < 0 %>
@@ -48,4 +54,8 @@
   </tr>
 	<% end %>
 </table>
+</td>
+</tr>
+</table>
+<br />
 <%= link_to 'Home', :action => :query %>

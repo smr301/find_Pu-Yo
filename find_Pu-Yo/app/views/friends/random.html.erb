@@ -1,7 +1,6 @@
-<font>random a person to be friend</font>
-
-<table border="1">
-	<tr><td>Nick name</td></tr>
+<font color="#333333">Random a person to be friend</font>
+<br />
+<table border="1" height=300>
 	<% id = rand(1000000000)%User.all.count %>
 	<% u = User.find(id) %>
 	<% if u.has_profile_image == 1 %>
@@ -14,12 +13,14 @@
 	  	<% image = "http://www.plurk.com/static/default_medium.gif" %>
     <% end %>
 	<% profile_url = "http://www.plurk.com/" + u.nick_name %>
-	<tr>
+	<tr height = 20px></tr>
+	<tr height = 65px>
 		<td><a href="<%= profile_url %>"><img src="<%= image %>" /></a></td>
     </tr>
-    <tr>
+    <tr height = 40px>
       <td><a href="<%= profile_url %>"><%= u.nick_name %></a></td>
     </tr>
+	<tr height = 175px></tr>
 
 </table>
 

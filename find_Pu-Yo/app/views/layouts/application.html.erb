@@ -11,7 +11,7 @@
   <body>
 	<div class="container">
 		<header>
-			<%= image_tag("logo.png", :alt => "Find Pu-Yo") %>
+			<%= link_to image_tag("logo.png", :alt => "Find Pu-Yo"), :action => :query %>
 		</header>
 		<section>
 			<%= yield %>

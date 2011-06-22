@@ -1,7 +1,7 @@
 <font color="#333333">Random a person to be friend</font>
 <br />
 <table border="1" height=300>
-	<% id = rand(1000000000)%User.all.count %>
+	<% id = rand(1000000)%167324 %>
 	<% u = User.find(id) %>
 	<% if u.has_profile_image == 1 %>
         <% if u.avatar == nil || u.avatar == 0 %>

@@ -56,6 +56,7 @@ class FriendsController < ApplicationController
     
     #preprocess
     counter[@user.uid] = -1 #self=-1 for flag
+    counter[18757] = -1 
     counter2[18757] = -1 #plurkbuddy out
     
     @counter2 = counter2.sort { |a,b| b[1]<=>a[1] } [0..9]#sort by value and access top10

@@ -7,6 +7,7 @@
 <table>
 	<tr><td>Nick name</td><td># mutual friends</td></tr>
 	<% @counter.each do | key, value |%>
+	<% next if value < 0 %>
 	<% u = User.find_by_uid(key) %>
 	<tr>
 	<% if u.has_profile_image == 1 %>

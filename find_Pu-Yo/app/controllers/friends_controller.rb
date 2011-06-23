@@ -8,7 +8,7 @@ class FriendsController < ApplicationController
     #@user = User.find_by_nick_name("zerodie")
     @gender = params[:gender].to_i
     @user = User.find_by_nick_name(params[:user_name])
-    if @user != nil
+    if @user != nil && @user.crawled==1 #"level2 not crawled" r not handled yet
       friends = @user.all_friends
       #grab_level_2(friends)
       @counter = count(friends)[0..9] #top10 recommended
@@ -38,9 +38,12 @@ class FriendsController < ApplicationController
     friends_l1.each do |f|
       counter2[f.uid] = 0
     end
-
+    normalizer = {}
+    normalizer.default = 0
+    
     friends_l1.each do |f|
       friends_l2 = f.all_friends
+      normalizer[f.uid] = friends_l2.count
       friends_l2.each do |f2|
         if counter2.has_key?(f2.uid)
           counter2[f2.uid] = counter2[f2.uid] + 1 
@@ -58,6 +61,11 @@ class FriendsController < ApplicationController
     counter[@user.uid] = -1 #self=-1 for flag
     counter[18757] = -1 
     counter2[18757] = -1 #plurkbuddy out
+    
+    #friends goodness normalize
+    counter2.each do | key, value |
+      counter2[key] = (10000*value) / normalizer[key]
+    end
     
     @counter2 = counter2.sort { |a,b| b[1]<=>a[1] } [0..9]#sort by value and access top10
     counter.sort { |a,b| b[1]<=>a[1] } #sort by value    
